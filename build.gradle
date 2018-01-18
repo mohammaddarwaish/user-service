@@ -2,6 +2,7 @@ buildscript {
 	ext {
 		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
 		swaggerVersion = '2.7.0'
+		assertjVersion = '3.9.0'
 	}
 	repositories {
 		mavenCentral()
@@ -34,17 +35,19 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.liquibase:liquibase-core')
-	compile('org.springframework.boot:spring-boot-starter-security')
+	//compile('org.liquibase:liquibase-core')
+	//compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("io.springfox:springfox-swagger2:${swaggerVersion}")
 	compile("io.springfox:springfox-swagger-ui:${swaggerVersion}")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
-	compileOnly('org.projectlombok:lombok')
+	compile('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
+	testCompile("org.assertj:assertj-core:${assertjVersion}")
+	testCompile("org.apache.httpcomponents:httpclient")
 }
 
 mainClassName = 'mohammaddarwaish.com.github.userservice.UserServiceApplication'
