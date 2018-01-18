@@ -32,6 +32,9 @@ public class UserServiceTest {
     @Mock
     private EntityMapper entityMapper;
 
+    @Mock
+    private ViewMapper viewMapper;
+
     @InjectMocks
     private UserService userService;
 
@@ -71,6 +74,7 @@ public class UserServiceTest {
         User user = StubBuilder.user();
 
         given(userRepository.save(any(User.class))).willReturn(user);
+        given(viewMapper.map(request, User.class)).willReturn(user);
 
         // WHEN
         userService.createUser(request);
@@ -98,7 +102,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUser() {
+    public void updateUser_ShouldPartiallyUpdateUser() {
         // GIVEN
         User user = StubBuilder.user();
         user.setId(userId);
@@ -106,7 +110,9 @@ public class UserServiceTest {
         Map<String, Object> request = ImmutableMap.of("email", "newEmail@test.co.uk");
 
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
+        given(viewMapper.map(user, UserRequest.class)).willReturn(userRequest);
         given(entityMapper.mergeFieldsWithEntity(UserRequest.class, userRequest, request)).willReturn(userRequest);
+        given(viewMapper.map(userRequest, User.class)).willReturn(user);
 
         // WHEN
         userService.updateUser(userId, request);

@@ -16,6 +16,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final EntityMapper entityMapper;
+    private final ViewMapper viewMapper;
 
     public User getUser(Long userId) {
         return userRepository.findById(userId)
@@ -28,32 +29,20 @@ public class UserService {
                     throw new EntityExistsException(String.format("User with email address %s already exists", request.getEmail()));
                 });
 
-        User user = mapToUser(request);
+        User user = viewMapper.map(request, User.class);
         return userRepository.save(user);
     }
 
     public void updateUser(Long userId, Map<String, Object> updatedFields) {
         User user = getUser(userId);
-        UserRequest updatedEntity = entityMapper.mergeFieldsWithEntity(UserRequest.class, mapFromUser(user), updatedFields);
-        User entity = mapToUser(updatedEntity);
+        UserRequest request = viewMapper.map(user, UserRequest.class);
+
+        UserRequest updatedEntity = entityMapper.mergeFieldsWithEntity(UserRequest.class, request, updatedFields);
+
+        User entity = viewMapper.map(updatedEntity, User.class);
         entity.setId(userId);
+
         userRepository.save(entity);
-    }
-
-    private User mapToUser(UserRequest request) {
-        return User.builder()
-                .forename(request.getForename())
-                .surname(request.getSurname())
-                .email(request.getEmail())
-                .build();
-    }
-
-    private UserRequest mapFromUser(User user) {
-        return UserRequest.builder()
-                .forename(user.getForename())
-                .surname(user.getSurname())
-                .email(user.getEmail())
-                .build();
     }
 
 }
