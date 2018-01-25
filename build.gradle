@@ -23,7 +23,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'findbugs'
 
-group = 'mohammaddarwaish.com.github'
+group = 'com.github'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -53,7 +53,7 @@ dependencies {
 	testCompile("org.apache.httpcomponents:httpclient")
 }
 
-mainClassName = 'mohammaddarwaish.com.github.userservice.UserServiceApplication'
+mainClassName = 'com.github.userservice.UserServiceApplication'
 
 tasks.withType(FindBugs) {
 	reports {

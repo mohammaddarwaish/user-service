@@ -7,7 +7,7 @@
     </Match>
 
     <Match>
-        <Class name="mohammaddarwaish.com.github.userservice.integration.UserControllerTest"/>
+        <Class name="com.github.userservice.integration.UserControllerTest"/>
         <Method name="postUser_ShouldCreateAndReturnSavedUser"/>
         <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"/>
     </Match>
