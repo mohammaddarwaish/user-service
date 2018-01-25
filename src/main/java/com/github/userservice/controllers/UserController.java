@@ -42,4 +42,10 @@ public class UserController {
         userService.updateUser(id, updatedFields);
     }
 
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable Long id) {
+        this.userService.deleteUser(id);
+    }
+
 }

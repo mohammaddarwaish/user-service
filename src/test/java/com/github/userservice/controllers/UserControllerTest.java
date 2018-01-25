@@ -104,4 +104,16 @@ public class UserControllerTest {
                 .andExpect(status().isNoContent());
         verify(userService).updateUser(userId, request);
     }
+
+    @Test
+    public void deleteUser_ShouldDeleteTheUser() throws Exception {
+        // GIVEN
+        willDoNothing().given(userService).deleteUser(userId);
+
+        // WHEN THEN
+        mockMvc.perform(MockMvcRequestBuilders.delete("/v1/user/" + userId))
+                .andExpect(status().isNoContent());
+        verify(userService).deleteUser(userId);
+    }
+
 }

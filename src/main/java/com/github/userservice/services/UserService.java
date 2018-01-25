@@ -45,4 +45,9 @@ public class UserService {
         userRepository.save(entity);
     }
 
+    public void deleteUser(Long userId) {
+        getUser(userId);
+        userRepository.deleteById(userId);
+    }
+
 }

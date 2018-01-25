@@ -120,4 +120,36 @@ public class UserServiceTest {
         verify(userRepository).save(user);
         verify(entityMapper).mergeFieldsWithEntity(UserRequest.class, userRequest, request);
     }
+
+    @Test
+    public void deleteUser_ShouldDeleteTheUser() {
+        // GIVEN
+        User user = StubBuilder.user();
+        user.setId(userId);
+
+        given(userRepository.findById(userId)).willReturn(Optional.of(user));
+
+        // WHEN
+        userService.deleteUser(userId);
+
+        // THEN
+        verify(userRepository).findById(userId);
+        verify(userRepository).deleteById(userId);
+    }
+
+    @Test
+    public void deleteUser_shouldThrowException_whenUserIsNotFoundById() {
+        // GIVEN
+        given(userRepository.findById(userId)).willReturn(Optional.empty());
+
+        // WHEN
+        Throwable actual = catchThrowable(() -> userService.deleteUser(userId));
+
+        // THEN
+        assertThat(actual).isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Could not find user by id: " + userId);
+        verify(userRepository).findById(userId);
+        verify(userRepository, never()).deleteById(userId);
+    }
+
 }

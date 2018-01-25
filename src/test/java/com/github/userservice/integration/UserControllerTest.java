@@ -118,4 +118,17 @@ public class UserControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
+    @Test
+    public void deleteUser_shouldDeleteTheUser() {
+        // GIVEN
+        Long userId = 1010101L;
+        HttpEntity<Object> entity = new HttpEntity<>(new HttpHeaders());
+
+        // WHEN
+        ResponseEntity<Void> response = restTemplate.exchange(baseUrl + "/" + userId, HttpMethod.DELETE, entity, Void.class);
+
+        //THEN
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+    }
+
 }
