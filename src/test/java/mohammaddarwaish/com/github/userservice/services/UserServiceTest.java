@@ -54,9 +54,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUser_ShouldThrowException_IfUserIsNotFoundById() {
+    public void getUser_ShouldThrowException_WhenUserIsNotFoundById() {
         // GIVEN
-        User user = StubBuilder.user();
         given(userRepository.findById(userId)).willReturn(Optional.empty());
 
         // WHEN
@@ -85,7 +84,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_ShouldThrowException_IfUserWithEMailAlreadyExists() {
+    public void createUser_ShouldThrowException_WhenUserWithEMailAlreadyExists() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();

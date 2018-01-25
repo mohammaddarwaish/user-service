@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<FindBugsFilter>
+    <!-- Reason: Complains about AssertJ method return value-->
+    <Match>
+        <Class name="~.*Test" />
+        <Bug pattern="RV_RETURN_VALUE_IGNORED"/>
+    </Match>
+
+    <Match>
+        <Class name="mohammaddarwaish.com.github.userservice.integration.UserControllerTest"/>
+        <Method name="postUser_ShouldCreateAndReturnSavedUser"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"/>
+    </Match>
+
+</FindBugsFilter>

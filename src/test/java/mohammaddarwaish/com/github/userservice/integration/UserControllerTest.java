@@ -57,7 +57,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ShouldReturn404_IfUserDoesNotExist() {
+    public void getUser_ShouldReturn404_WhenUserDoesNotExist() {
         // GIVEN
         Long userId = 110011L;
 
@@ -86,7 +86,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_ShouldReturn409_IfUserWithEmailAlreadyExists() {
+    public void postUser_ShouldReturn409_WhenUserWithEmailAlreadyExists() {
 
         // GIVEN
         UserRequest request = StubBuilder.userRequest();

@@ -52,9 +52,8 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ShouldReturn404_IfUserIsNotFound() throws Exception {
+    public void getUser_ShouldReturn404_WhenUserIsNotFound() throws Exception {
         // GIVEN
-        User user = StubBuilder.user();
         given(userService.getUser(userId)).willThrow(new EntityNotFoundException());
 
         // WHEN THEN
@@ -81,7 +80,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_ShouldReturn409_IfUserWithEmailAlreadyExists() throws Exception {
+    public void postUser_ShouldReturn409_WhenUserWithEmailAlreadyExists() throws Exception {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         String payload = new ObjectMapper().writeValueAsString(request);
@@ -97,7 +96,6 @@ public class UserControllerTest {
     @Test
     public void patchUser_ShouldUpdateTheFieldsPassedInThePayload() throws Exception {
         // GIVEN
-        User user = StubBuilder.user();
         Map<String, Object> request = ImmutableMap.of("email", "test@email.co.uk");
         String payload = new ObjectMapper().writeValueAsString(request);
         willDoNothing().given(userService).updateUser(userId, request);
