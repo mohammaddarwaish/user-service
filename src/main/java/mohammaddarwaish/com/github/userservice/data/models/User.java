@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
 public class User {
 
     @Id

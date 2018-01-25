@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: user-service
+    liquibase:
+        change-log: classpath:/db/changelog/db.changelog-master.xml
+        enabled: false
+#       rollback-file:

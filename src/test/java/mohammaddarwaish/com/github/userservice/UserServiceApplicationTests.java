@@ -1,7 +1,6 @@
 package mohammaddarwaish.com.github.userservice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ActiveProfiles("test")
 @WebAppConfiguration
 @AutoConfigureMockMvc
-@Ignore
 public class UserServiceApplicationTests {
 
     @Autowired
@@ -37,18 +35,9 @@ public class UserServiceApplicationTests {
 
     @Test
     public void healthAndMetricsCheck() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/health")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/env")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/configprops")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/info")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/loggers")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/trace")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/beans")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/autoconfig")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/mappings")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/metrics")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/auditevents")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/dump")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/actuator/")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/actuator//health")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/actuator/info")).andExpect(status().isOk());
     }
 
 }
