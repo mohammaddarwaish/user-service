@@ -1,5 +1,8 @@
 package com.github.userservice.services;
 
+import static java.util.Collections.emptyList;
+import static java.util.stream.Stream.concat;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -9,9 +12,6 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Collections.emptyList;
-import static java.util.stream.Stream.concat;
 
 @Service
 public class EntityMapper {

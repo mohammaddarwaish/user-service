@@ -1,5 +1,7 @@
 package com.github.userservice.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.userservice.helpers.StubBuilder;
 import com.github.userservice.helpers.TestEntityA;
 import com.github.userservice.helpers.TestEntityB;
@@ -8,8 +10,6 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class EntityMapperTest {
 
@@ -47,12 +47,13 @@ public class EntityMapperTest {
         Long entityBId = StubBuilder.randomId();
         TestEntityB entityB = TestEntityB.builder().id(entityBId).fieldOne(fieldValue).fieldTwo(fieldValue).build();
 
-        Long entityAId = StubBuilder.randomId();
-        TestEntityA entityA = TestEntityA.builder().id(entityAId).fieldOne(fieldValue).fieldTwo(fieldValue).testEntityB(entityB).build();
 
         Map<String, Object> entityBMap = new HashMap<>();
         entityBMap.put("id", entityBId);
         entityBMap.put("fieldTwo", updatedValue);
+
+        Long entityAId = StubBuilder.randomId();
+        TestEntityA entityA = TestEntityA.builder().id(entityAId).fieldOne(fieldValue).fieldTwo(fieldValue).testEntityB(entityB).build();
 
         Map<String, Object> entityAMap = new HashMap<>();
         entityAMap.put("id", entityAId);

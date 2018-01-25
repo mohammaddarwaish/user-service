@@ -1,5 +1,12 @@
 package com.github.userservice.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
 import com.github.userservice.data.models.User;
 import com.github.userservice.data.repositories.UserRepository;
 import com.github.userservice.helpers.StubBuilder;
@@ -15,13 +22,6 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Map;
 import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -67,7 +67,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_ShouldPersistUserInDB() {
+    public void createUser_ShouldPersistUserInDb() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();

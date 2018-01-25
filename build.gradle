@@ -22,6 +22,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
 
 group = 'com.github'
 version = '0.0.1-SNAPSHOT'
@@ -64,4 +65,19 @@ tasks.withType(FindBugs) {
 	effort = "max"
 	reportLevel = "medium"
 	excludeFilter = file("$rootProject.projectDir/config/findbugs/excludeFilter.xml")
+}
+
+
+checkstyle {
+    toolVersion "8.7"
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+    ignoreFailures = false
+    maxErrors = 0
+    maxWarnings = 50
 }

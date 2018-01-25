@@ -21,6 +21,6 @@ public class TestEntityA {
 
     private TestEntityB testEntityB;
 
-    private List<TestEntityB> testEntityBS;
+    private List<TestEntityB> testEntityBs;
 
 }

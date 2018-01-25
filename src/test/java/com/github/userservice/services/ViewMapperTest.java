@@ -1,12 +1,12 @@
 package com.github.userservice.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.userservice.data.models.User;
 import com.github.userservice.helpers.StubBuilder;
 import com.github.userservice.views.UserRequest;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewMapperTest {
 
