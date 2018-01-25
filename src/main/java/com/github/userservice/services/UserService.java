@@ -17,6 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final EntityMapper entityMapper;
     private final ViewMapper viewMapper;
+    private final ConstraintsValidator constraintsValidator;
 
     public User getUser(Long userId) {
         return userRepository.findById(userId)
@@ -24,6 +25,7 @@ public class UserService {
     }
 
     public User createUser(UserRequest request) {
+        constraintsValidator.validate(request);
         userRepository.findByEmail(request.getEmail())
                 .ifPresent(u -> {
                     throw new EntityExistsException(String.format("User with email address %s already exists", request.getEmail()));
@@ -34,6 +36,9 @@ public class UserService {
     }
 
     public void updateUser(Long userId, Map<String, Object> updatedFields) {
+
+        constraintsValidator.validate(UserRequest.class, updatedFields);
+
         User user = getUser(userId);
         UserRequest request = viewMapper.map(user, UserRequest.class);
 

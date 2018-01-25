@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
 @ControllerAdvice
@@ -32,6 +33,12 @@ public class RestExceptionProcessor {
     public void entityExistsException(HttpServletResponse response, EntityExistsException ex) throws IOException {
         log.error("Exception entity already exists: ", ex);
         response.sendError(HttpStatus.CONFLICT.value());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public void constraintViolationException(HttpServletResponse response, ConstraintViolationException ex) throws IOException {
+        log.error("Exception constraint violation: " + ex);
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
 }

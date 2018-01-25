@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -34,6 +35,9 @@ public class UserServiceTest {
 
     @Mock
     private ViewMapper viewMapper;
+
+    @Mock
+    private ConstraintsValidator constraintsValidator;
 
     @InjectMocks
     private UserService userService;
@@ -72,6 +76,7 @@ public class UserServiceTest {
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();
 
+        willDoNothing().given(constraintsValidator).validate(request);
         given(userRepository.save(any(User.class))).willReturn(user);
         given(viewMapper.map(request, User.class)).willReturn(user);
 
@@ -79,6 +84,7 @@ public class UserServiceTest {
         userService.createUser(request);
 
         // THEN
+        verify(constraintsValidator).validate(request);
         verify(userRepository).save(user);
         verify(userRepository).findByEmail(request.getEmail());
     }
@@ -89,6 +95,7 @@ public class UserServiceTest {
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();
 
+        willDoNothing().given(constraintsValidator).validate(request);
         given(userRepository.findByEmail(request.getEmail())).willReturn(Optional.of(user));
 
         // WHEN
@@ -97,6 +104,7 @@ public class UserServiceTest {
         // THEN
         assertThat(actual).isInstanceOf(EntityExistsException.class)
                 .withFailMessage("User with email address " + request.getEmail() + " already exists");
+        verify(constraintsValidator).validate(request);
         verify(userRepository, never()).save(user);
     }
 
@@ -108,6 +116,7 @@ public class UserServiceTest {
         UserRequest userRequest = StubBuilder.userRequest();
         Map<String, Object> request = ImmutableMap.of("email", "newEmail@test.co.uk");
 
+        willDoNothing().given(constraintsValidator).validate(UserRequest.class, request);
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
         given(viewMapper.map(user, UserRequest.class)).willReturn(userRequest);
         given(entityMapper.mergeFieldsWithEntity(UserRequest.class, userRequest, request)).willReturn(userRequest);
@@ -117,6 +126,7 @@ public class UserServiceTest {
         userService.updateUser(userId, request);
 
         // THEN
+        verify(constraintsValidator).validate(UserRequest.class, request);
         verify(userRepository).save(user);
         verify(entityMapper).mergeFieldsWithEntity(UserRequest.class, userRequest, request);
     }

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.Map;
 
@@ -37,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<User> postUser(@RequestBody @Valid final UserRequest userRequest) {
+    public ResponseEntity<User> postUser(@RequestBody final UserRequest userRequest) {
         User user = userService.createUser(userRequest);
         URI uri = ServletUriComponentsBuilder.fromPath("/v1/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(user);
