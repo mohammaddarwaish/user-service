@@ -50,7 +50,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ShouldReturnAUser() {
+    public void getUser_shouldReturnAUser() {
         // GIVEN
         Long userId = 1010101L;
 
@@ -62,7 +62,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ShouldReturn404_WhenUserDoesNotExist() {
+    public void getUser_shouldReturn404_whenUserDoesNotExist() {
         // GIVEN
         Long userId = 110011L;
 
@@ -74,10 +74,8 @@ public class UserControllerTest {
                 .containsOnly("Not Found", "Could not find user by id: " + userId);
     }
 
-
     @Test
-    public void postUser_ShouldCreateAndReturnSavedUser() {
-
+    public void postUser_shouldCreateAndReturnSavedUser() {
         // GIVEN
         UserRequest request = UserRequest.builder().forename("Ada").surname("Lovelace").email("ada@test.co.uk").build();
 
@@ -91,8 +89,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_ShouldReturn409_WhenUserWithEmailAlreadyExists() {
-
+    public void postUser_shouldReturn409_whenUserWithEmailAlreadyExists() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
 

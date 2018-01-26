@@ -21,7 +21,7 @@ public class EntityMapperTest {
     }
 
     @Test
-    public void mergeEntities_ShouldMergeTwoEntitiesByOverWritingEntityOneFieldsWithEntityTwo() {
+    public void mergeEntities_shouldMergeTwoEntitiesByOverWritingEntityOneFieldsWithEntityTwo() {
         // GIVEN
         Long entityBId = StubBuilder.randomId();
         TestEntityB entityBOne = TestEntityB.builder().id(entityBId).fieldOne("entity B One field One").fieldTwo("entity B One field Two").build();
@@ -38,7 +38,7 @@ public class EntityMapperTest {
     }
 
     @Test
-    public void mergeFieldsWithEntity_ShouldMergeAllUpdatedFieldsExceptIds() {
+    public void mergeFieldsWithEntity_shouldMergeAllUpdatedFieldsExceptIds() {
 
         // GIVEN
         String fieldValue = "Value";

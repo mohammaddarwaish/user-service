@@ -45,7 +45,7 @@ public class UserServiceTest {
     private Long userId = StubBuilder.randomId();
 
     @Test
-    public void getUser_ShouldReturnAUser() {
+    public void getUser_shouldReturnAUser() {
         // GIVEN
         User user = StubBuilder.user();
         given(userRepository.findById(userId)).willReturn(Optional.of(user));
@@ -58,7 +58,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUser_ShouldThrowException_WhenUserIsNotFoundById() {
+    public void getUser_shouldThrowException_whenUserIsNotFoundById() {
         // GIVEN
         given(userRepository.findById(userId)).willReturn(Optional.empty());
 
@@ -71,7 +71,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_ShouldPersistUserInDb() {
+    public void createUser_shouldPersistUserInDb() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();
@@ -90,7 +90,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser_ShouldThrowException_WhenUserWithEMailAlreadyExists() {
+    public void createUser_shouldThrowException_whenUserWithEMailAlreadyExists() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         User user = StubBuilder.user();
@@ -109,7 +109,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUser_ShouldPartiallyUpdateUser() {
+    public void updateUser_shouldPartiallyUpdateUser() {
         // GIVEN
         User user = StubBuilder.user();
         user.setId(userId);
@@ -132,7 +132,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void deleteUser_ShouldDeleteTheUser() {
+    public void deleteUser_shouldDeleteTheUser() {
         // GIVEN
         User user = StubBuilder.user();
         user.setId(userId);

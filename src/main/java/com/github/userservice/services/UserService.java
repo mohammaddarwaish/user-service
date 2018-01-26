@@ -36,7 +36,6 @@ public class UserService {
     }
 
     public void updateUser(Long userId, Map<String, Object> updatedFields) {
-
         constraintsValidator.validate(UserRequest.class, updatedFields);
 
         User user = getUser(userId);

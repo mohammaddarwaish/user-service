@@ -40,7 +40,7 @@ public class UserControllerTest {
     private Long userId = StubBuilder.randomId();
 
     @Test
-    public void getUser_ShouldReturnAUser() throws Exception {
+    public void getUser_shouldReturnAUser() throws Exception {
         // GIVEN
         User user = StubBuilder.user();
         given(userService.getUser(userId)).willReturn(user);
@@ -52,7 +52,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ShouldReturn404_WhenUserIsNotFound() throws Exception {
+    public void getUser_shouldReturn404_whenUserIsNotFound() throws Exception {
         // GIVEN
         given(userService.getUser(userId)).willThrow(new EntityNotFoundException());
 
@@ -62,7 +62,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_ShouldCreateAUser() throws Exception {
+    public void postUser_shouldCreateAUser() throws Exception {
         // GIVEN
         User user = StubBuilder.user();
         user.setId(userId);
@@ -80,7 +80,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_ShouldReturn409_WhenUserWithEmailAlreadyExists() throws Exception {
+    public void postUser_shouldReturn409_WhenUserWithEmailAlreadyExists() throws Exception {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
         String payload = new ObjectMapper().writeValueAsString(request);
@@ -94,7 +94,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void patchUser_ShouldUpdateTheFieldsPassedInThePayload() throws Exception {
+    public void patchUser_shouldUpdateTheFieldsPassedInThePayload() throws Exception {
         // GIVEN
         Map<String, Object> request = ImmutableMap.of("email", "test@email.co.uk");
         String payload = new ObjectMapper().writeValueAsString(request);
@@ -108,7 +108,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUser_ShouldDeleteTheUser() throws Exception {
+    public void deleteUser_shouldDeleteTheUser() throws Exception {
         // GIVEN
         willDoNothing().given(userService).deleteUser(userId);
 

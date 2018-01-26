@@ -18,7 +18,7 @@ public class ViewMapperTest {
     }
 
     @Test
-    public void map_ShouldMapUserRequestToUser() {
+    public void map_shouldMapUserRequestToUser() {
         // GIVEN
         UserRequest request = StubBuilder.userRequest();
 
@@ -30,7 +30,7 @@ public class ViewMapperTest {
     }
 
     @Test
-    public void map_ShouldMapUserToUserRequest() {
+    public void map_shouldMapUserToUserRequest() {
         // GIVEN
         User user = StubBuilder.user();
 

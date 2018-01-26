@@ -57,10 +57,10 @@ dependencies {
 mainClassName = 'com.github.userservice.UserServiceApplication'
 
 tasks.withType(FindBugs) {
-	reports {
-		xml.enabled false
-		html.enabled true
-	}
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
 	ignoreFailures = false
 	effort = "max"
 	reportLevel = "medium"
@@ -74,10 +74,14 @@ checkstyle {
 
 tasks.withType(Checkstyle) {
     reports {
-        xml.enabled false
-        html.enabled true
+        xml.enabled = false
+        html.enabled = true
     }
     ignoreFailures = false
     maxErrors = 0
     maxWarnings = 50
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
 }
