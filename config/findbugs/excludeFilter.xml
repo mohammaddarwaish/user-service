@@ -8,7 +8,7 @@
 
     <Match>
         <Class name="com.github.userservice.integration.UserControllerTest"/>
-        <Method name="postUser_ShouldCreateAndReturnSavedUser"/>
+        <Method name="postUser_shouldCreateAndReturnSavedUser"/>
         <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE"/>
     </Match>
 

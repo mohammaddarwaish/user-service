@@ -1,5 +1,6 @@
 package com.github.userservice.helpers;
 
+import com.github.userservice.data.models.Role;
 import com.github.userservice.data.models.User;
 import com.github.userservice.views.UserRequest;
 
@@ -28,4 +29,12 @@ public abstract class StubBuilder {
                 .email("test@email.co.uk")
                 .build();
     }
+
+    public static Role role() {
+        return Role.builder()
+                .code("ADMIN")
+                .displayName("Administrator")
+                .build();
+    }
+
 }

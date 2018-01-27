@@ -54,6 +54,7 @@ public class UserControllerTest {
         // GIVEN
         Long userId = 1010101L;
 
+        // WHEN
         ResponseEntity<User> actual = restTemplate.getForEntity(baseUrl + "/" + userId, User.class);
 
         // THEN
@@ -66,6 +67,7 @@ public class UserControllerTest {
         // GIVEN
         Long userId = 110011L;
 
+        // WHEN
         ResponseEntity<Object> actual = restTemplate.getForEntity(baseUrl + "/" + userId, Object.class);
 
         // THEN
@@ -96,7 +98,7 @@ public class UserControllerTest {
         // WHEN
         ResponseEntity<Object> actual = restTemplate.postForEntity(baseUrl, request, Object.class);
 
-        //THEN
+        // THEN
         assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
         assertThat(actual.getBody()).extracting("error", "message")
                 .containsOnly("Conflict", "User with email address " + request.getEmail() + " already exists");
