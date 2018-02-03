@@ -35,8 +35,8 @@ public class UserServiceApplicationTests {
 
     @Test
     public void healthAndMetricsCheck() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/actuator/")).andExpect(status().isOk());
-        mockMvc.perform(MockMvcRequestBuilders.get("/actuator//health")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/actuator")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/actuator/health")).andExpect(status().isOk());
         mockMvc.perform(MockMvcRequestBuilders.get("/actuator/info")).andExpect(status().isOk());
     }
 
