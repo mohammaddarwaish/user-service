@@ -23,8 +23,8 @@ public class RestExceptionProcessor {
         response.sendError(HttpStatus.NOT_FOUND.value());
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public void illegalArgumentException(HttpServletResponse response, IllegalArgumentException ex) throws IOException {
+    @ExceptionHandler(value = {IllegalArgumentException.class, ConstraintViolationException.class})
+    public void illegalArgumentViolationException(HttpServletResponse response, Exception ex) throws IOException {
         log.error("Exception illegal or inappropriate argument received: ", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
@@ -33,12 +33,6 @@ public class RestExceptionProcessor {
     public void entityExistsException(HttpServletResponse response, EntityExistsException ex) throws IOException {
         log.error("Exception entity already exists: ", ex);
         response.sendError(HttpStatus.CONFLICT.value());
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public void constraintViolationException(HttpServletResponse response, ConstraintViolationException ex) throws IOException {
-        log.error("Exception constraint violation: " + ex);
-        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
 }

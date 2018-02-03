@@ -23,6 +23,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'findbugs'
 apply plugin: 'checkstyle'
+apply plugin: 'pmd'
 
 group = 'com.github'
 version = '0.0.1-SNAPSHOT'
@@ -44,7 +45,7 @@ dependencies {
 	compile("io.springfox:springfox-swagger2:${swaggerVersion}")
 	compile("io.springfox:springfox-swagger-ui:${swaggerVersion}")
 	compile ("ma.glasnost.orika:orika-core:${orikaVersion}")
-	runtime('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
 	compile('org.projectlombok:lombok')
@@ -55,6 +56,11 @@ dependencies {
 }
 
 mainClassName = 'com.github.userservice.UserServiceApplication'
+
+clean.doLast {
+	file('out').deleteDir()
+	println "Deleted: ${rootDir}\\out"
+}
 
 tasks.withType(FindBugs) {
     reports {
