@@ -10,5 +10,47 @@
     <preConditions>
         <dbms type="h2" />
     </preConditions>
+    
+    <changeSet id="01-create-table-role" author="Saleem Darwaish">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" type="VARCHAR(8)"/>
+            <column name="display_name" type="VARCHAR(30)"/>
+        </createTable>
+        <rollback>
+            <delete tableName="role"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="01-create-table-user" author="Saleem Darwaish">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="forename" type="VARCHAR(100)"/>
+            <column name="surname" type="VARCHAR(100)"/>
+            <column name="email" type="VARCHAR(250)"/>
+        </createTable>
+        <rollback>
+            <delete tableName="user"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="03-add-user-roles" author="Saleem Darwaish">
+       <sql>
+           INSERT INTO `role` (`code`, `display_name`) VALUES
+           ('admin','Administrator'),
+           ('cm','Content Manager'),
+           ('merchant','Merchant'),
+           ('buyer','Buyer');
+       </sql>
+        <rollback>
+            <sql>
+                TRUNCATE table role;
+            </sql>
+        </rollback>
+    </changeSet>
 
 </databaseChangeLog>

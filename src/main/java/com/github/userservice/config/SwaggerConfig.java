@@ -26,7 +26,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("Mohammad Darwaish","https://github.com/mohammaddarwaish/user-service","");
+        Contact contact = new Contact("Saleem Darwaish","https://github.com/saleemdarwaish/user-service","");
         return new ApiInfoBuilder()
                 .title("User Service")
                 .description("Provide User CRUD, authorisation and authentication operations")

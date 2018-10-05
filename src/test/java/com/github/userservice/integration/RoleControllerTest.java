@@ -1,22 +1,21 @@
 package com.github.userservice.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.userservice.data.models.Role;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -37,7 +36,7 @@ public class RoleControllerTest {
     @Before
     public void setUp() {
         //Using Apache HttpClient as HttpUrlConnection does not support patch
-        restTemplate = new TestRestTemplate(new RestTemplate(new HttpComponentsClientHttpRequestFactory()));
+        restTemplate = new TestRestTemplate(new RestTemplateBuilder());
         baseUrl = "http://localhost:" + port + "/v1/role";
     }
 

@@ -3,5 +3,9 @@ spring:
         name: user-service
     liquibase:
         change-log: classpath:/db/changelog/db.changelog-master.xml
-        enabled: false
-#       rollback-file:
+        enabled: true
+#    datasource:
+#      url: jdbc:mysql://localhost:3306/user_service?verifyServerCertificate=false&useSSL=true
+#      username: root
+#      password:
+#      driverClassName: com.mysql.jdbc.Driver
