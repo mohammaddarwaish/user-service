@@ -14,8 +14,8 @@ The diagram describe the Project structure
 |   settings.gradle
 |
 +---config
-|   +---checkstyle
-|   \---findbugs
+|   +---checkstyle              // Checkstyle configurations
+|   \---findbugs                // Findbugs filters configurations
 +---gradle
 |   \---wrapper
 \---src
@@ -34,7 +34,7 @@ The diagram describe the Project structure
     |   |               \---views
     |   \---resources
     |       \---db
-    |           \---changelog
+    |           \---changelog       // Liquibase change logs
     \---test
         +---java
         |   \---com
@@ -73,4 +73,31 @@ Note: this will run all static code analysers such as CheckStyle, Findbugs, and 
 building the project.      
 To only build the project without running any checks execute `./gradlew assemble`
 
-Both of these steps will create an executable jar in: _${ProjectDir}\build\libs_
+Both of these steps will create an executable jar in: _${ProjectDir}\build\libs
+
+##### Run application locally #####
+
+To run the application without building execute `./gradlew bootRun`
+It will build the project and start the application. By default the application will use the `dev` profile,
+to use a different profile execute the following command `./gradlew bootRun -Dspring.profiles.active=NAME_OF_PROFILE`
+
+You can also pass configuration such as database configuration or any other configuration. For example to run
+the application on port 80 rather than the default 8080 execute `./gradlew bootRun -Dserver.port=80`
+
+You can also provide a file that contains the configuration `./gradlew bootRun -Dspring.config.location=<file-path>\application.yaml`
+
+Go to the URL `http://localhost:8080/swagger-ui.html` for swagger UI documentation.
+
+##### build Docker image locally #####
+
+The project contains a Dockerfile that has all necessary instruction to build an image
+Execute `docker build -t user-service .` to create an image.
+
+To run the image execute `docker run -p :8080:8080 user-service`
+
+##### Checks and reports #####
+
+To run all checks such as tests, Checkstyle, Findbugs and PMD execute `./gradlew check` .
+The reports produced can be found in: ${ProjectDir}\build\reports
+
+You can also execute a single check such as `./gradlew checkStyleMain` will only run checkstyle on the /src/main directory

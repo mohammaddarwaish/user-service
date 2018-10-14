@@ -60,6 +60,11 @@ dependencies {
 
 mainClassName = 'com.github.userservice.UserServiceApplication'
 
+// Required in order to pass command line arguments to Spring
+bootRun {
+	systemProperties = System.properties
+}
+
 clean.doLast {
 	file('out').deleteDir()
 	println "Deleted: ${rootDir}\\out"
