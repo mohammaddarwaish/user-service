@@ -28,7 +28,7 @@ apply plugin: 'pmd'
 
 group = 'com.github'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = '11'
 
 repositories {
 	mavenLocal()
@@ -94,8 +94,4 @@ tasks.withType(Checkstyle) {
     ignoreFailures = false
     maxErrors = 0
     maxWarnings = 50
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.4.1'
 }
